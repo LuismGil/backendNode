@@ -1,29 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = express.Router();
+
+// const router = require('./components/message/network');
+const router = require('./network/routes');
 
 var app = express();
 app.use(bodyParser.json());
-app.use(router);
+// app.use(router);
 
-router.get('/message', function (req, res) {
-  console.log(req.headers)
-  res.header({
-    "custom-header": 'Our personality value'
-  })
-  res.send('Messages List')
-})
+router(app);
 
-router.post('/message', function (req, res) {
-  console.log(req.body);
-  console.log(req.query);
-  res.status(201).send({error: '', body: 'Create'})
-  res.send('Messages ' + req.body.text + ' added')
-})
-
-// app.use('/', function (req, res) {
-//   res.send('Hola');
-// });
+app.use('/app', express.static('public'));
 
 app.listen(3000);
 console.log('App is listening at http://localhost:3000')
