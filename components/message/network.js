@@ -1,24 +1,27 @@
 const express = require('express');
 const response = require('../../network/response');
+const controller = require('./controller');
 
 const router = express.Router();
 
 router.get('/', function (req, res) {
-  console.log(req.headers)
-  res.header({
-    "custom-header": 'Our personality value'
-  })
-  response.success(req, res, 'Messages List');
+ controller.getMessages()
+   .then((messageList) => {
+     response.success(req, res, messageList, 200);
+   })
+   .catch(e => {
+     response.error(req, res, 'Unexpected Error', 500, e)
+   })
 });
 
 router.post('/', function (req, res) {
-  console.log(req.body);
-
-  if (req.query.error == "ok") {
-    response.error(req, res, 'Unespected Error', 500, 'It is only a simulation of the errors');
-  } else {
-    response.success(req, res, 'Create', 201);
-  }
+  controller.addMessage(req.body.user, req.body.message)
+    .then((fullMessage) => {
+      response.success(req, res, fullMessage, 201);
+    })
+    .catch(e => {
+      response.error(req, res, 'Invalid information', 400, 'Error at Controller');
+    });
 });
 
-module.exports = router;
+module.exports = router; 
