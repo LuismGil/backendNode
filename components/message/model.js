@@ -11,5 +11,5 @@ const mySchema = new Schema({
   date: Date
 });
 
-const model = mongoose.model('Message', mySchema);
-module.exports = model;
+const Model = mongoose.model('Message', mySchema);
+module.exports = Model;
