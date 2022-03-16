@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const mySchema = new Schema({
     users: [{
         type: Schema.ObjectId,
-        ref: 'User',
+        ref: 'User'
     }],
 });
 
-const model = mongoose.model('Chat', mySchema);
-module.exports = model;
+const Model = mongoose.model('Chat', mySchema);
+module.exports = Model;

@@ -9,6 +9,7 @@ function addMessage(user, message) {
     }
 
     const fullMessage = {
+      chat: chat,
       user: user,
       message: message, 
       date: new Date()

@@ -10,7 +10,7 @@ function listChats(userId) {
 		let filter = {};
 		if (userId) {
 			filter = {
-				users: userId,
+				users: userId
 			}
 		}
 	    
